@@ -20,7 +20,7 @@ These are hard constraints. They exist because we already paid for them.
 
 - Do not write `/sys/class/nanohub/nanohub/lock` (can brick nanohub).
 - Do not use firmware `download*` / `erase_shared*` nodes.
-- `lcd-tools` is the supported CLI. `lcd-tools --prepare-timepiece` is aggressive (cutOffScreen, bandMode) and returned errors without Lipstick.
+- `--prepare-timepiece` on catfish is **not** a safe “show the gray clock” switch. It calls `cutOffScreen` and `bandMode`. After we used it, the AMOLED stayed dark (no visible brightness) until a **watch** reboot. Never use it to recover a blank OLED.
 
 ## Voice loop regressions not to reintroduce
 

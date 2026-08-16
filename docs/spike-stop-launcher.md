@@ -47,7 +47,9 @@ Cause: during the spike, `mcetool -E enabled` was used, then LPM was left **`dis
 
 Fix applied 16:48 WIB: `mcetool -E enabled` then `mcetool --unblank-screen`. Display **on**, backlight 76, LPM enabled. User still reported **only the gray LCD** (16:49). MCE/backlight were already ON; the FSTN layer was still in timepiece.
 
-Follow-up 16:51: restarted Lipstick (compositor name had dropped from the session bus). 16:52: `setAmbientEnabled false`, `setUpdatesEnabled true`, MCE brightness 80 (sysfs 204). OLED should be bright if the panel is actually emitting; if the gray clock is still the only thing visible, nanohub LCD was left in timepiece by `--prepare-timepiece` and needs `nativeEnableLowPowerScreen(false)` or a **watch** reboot (not this PC).
+If the gray clock is still the only thing visible **and there is no OLED glow**, the panel is stuck the same way as the earlier fb0/backlight incident. Sysfs brightness can read 76–204 while the AMOLED emits nothing. `--prepare-timepiece` calls `cutOffScreen` / `bandMode`; do not use it as a wake path.
+
+**Recovery:** reboot the **watch**, not this PC. Done 16:55 WIB after user confirmed no brightness and keys/USB replug did nothing.
 
 ## Conclusion
 
