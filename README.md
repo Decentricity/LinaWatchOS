@@ -14,10 +14,10 @@ This repository is documentation. Runtime code for the voice loop lives in [watc
 | Pico TTS, chimes, rate-limit clips | Shipped in watch-voice |
 | Rate-limit → speak clips → Wi-Fi off once | Shipped |
 | Stop Lipstick spike | OLED unblanks without Lipstick. Gray LCD does **not**. Launcher restored. After restore, LPM was left disabled so keys looked dead; LPM re-enabled and OLED unblanked. |
-| Two-pane OLED console | Not built (blocked on LCD handover) |
-| Triple-tap Wi-Fi | Not built |
+| Two-pane OLED console | Watchface `018-lina-console.qml` (Lipstick stays). Color console + gray LCD handover confirmed 2026-08-16. |
+| Triple-tap Wi-Fi | Watchface MouseArea (Lipstick owns `fts_ts`; a second evdev reader sees no events). OLED on/dimmed only. |
 
-Next decision: a tiny `org.nemomobile.compositor` stub that acks MCE LPM, **or** keep Lipstick and replace its QML with the terminal. Do not `dd` `/dev/fb0`.
+Lipstick stays until there is an LPM stub. Do not `dd` `/dev/fb0`. Do not `--prepare-timepiece`.
 
 ## Docs
 
@@ -29,6 +29,7 @@ Next decision: a tiny `org.nemomobile.compositor` stub that acks MCE LPM, **or**
 - [Keep vs drop](docs/keep-vs-drop.md)
 - [Terminal console plan](docs/terminal-console-plan.md)
 - [Spike log](docs/spike-stop-launcher.md)
+- [Console watchface](docs/lina-console-watchface.md)
 
 ## Related
 

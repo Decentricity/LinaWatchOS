@@ -20,7 +20,7 @@ Goal: Linux framework, touch, graphics (only enough for a small console), SSIDs,
 
 Rollback is `systemctl --user -M ceres@ start asteroid-launcher`.
 
-- `asteroid-launcher.service` (blocked on LPM until stub or QML-only Lipstick)
+- `asteroid-launcher.service` (**do not stop** until LPM stub exists; QML-only terminal is a watchface on Lipstick)
 - asteroid-* apps (calculator, settings, …)
 - mapplauncherd boosters
 - PulseAudio (Lina uses tinyplay)
