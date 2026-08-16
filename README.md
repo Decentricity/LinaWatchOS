@@ -13,7 +13,7 @@ This repository is documentation. Runtime code for the voice loop lives in [watc
 | Voice loop on watch | Running (`watch-voice.service`) |
 | Pico TTS, chimes, rate-limit clips | Shipped in watch-voice |
 | Rate-limit → speak clips → Wi-Fi off once | Shipped |
-| Stop Lipstick spike | Done. OLED still unblanks via MCE. **Gray FSTN LCD does not show time** without Lipstick. Launcher restored. |
+| Stop Lipstick spike | OLED unblanks without Lipstick. Gray LCD does **not**. Launcher restored. After restore, LPM was left disabled so keys looked dead; LPM re-enabled and OLED unblanked. |
 | Two-pane OLED console | Not built (blocked on LCD handover) |
 | Triple-tap Wi-Fi | Not built |
 

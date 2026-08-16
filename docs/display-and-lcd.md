@@ -52,6 +52,8 @@ User units (ceres and root): `lcd-sync-time.timer`, `lcd-session-restart.service
 
 `--blank-screen-lpm` while already off is **denied**. Path is ON → LPM_ON, not OFF → LPM_ON.
 
+Do not leave `mcetool -E` / “Use low power mode” **disabled** if powerkey blanking mode is still `lpm`. That combination unblanks for a blink then drops to OFF while the gray LCD stays put, so the buttons look dead.
+
 ## Kernel / sysfs
 
 - `/sys/class/leds/lcd-backlight` — OLED backlight, 0–255. MCE drives this.

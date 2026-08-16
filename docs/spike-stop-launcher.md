@@ -41,7 +41,11 @@ Not disabled, not uninstalled.
 systemctl --user -M ceres@ start asteroid-launcher.service
 ```
 
-Launcher is **active** again as of this log. Confirm on-wrist that the gray clock is back after blank.
+Launcher came back. Gray FSTN clock returned. Then **buttons appeared dead**: top short-press did not visibly take over from the gray LCD.
+
+Cause: during the spike, `mcetool -E enabled` was used, then LPM was left **`disabled`** while `Powerkey blanking mode` was still `lpm`. MCE still logged powerkey (unblank ON, then `LPM_ON` → immediate `OFF`). The gray nanohub LCD stayed up, so it looked like the keys did nothing. OLED unblank was ~1 s of black behind the LCD.
+
+Fix applied 16:48 WIB: `mcetool -E enabled` then `mcetool --unblank-screen`. Display **on**, backlight 76, LPM enabled. Color panel should be visible again. Top short-press should blank to gray LPM and wake back to color.
 
 ## Conclusion
 
