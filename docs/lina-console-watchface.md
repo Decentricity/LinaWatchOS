@@ -15,6 +15,8 @@ Stopping Lipstick unblanks a black OLED and **breaks** gray LCD handover (MCE ne
 | Payload | `/var/lib/watch-voice/console.txt` (`date`, `WIFI ON`/`OFF`, `---`, then faux shell) |
 | Previous face | `/var/lib/watch-voice/previous-watchface` |
 | Triple-tap Wi-Fi | Watchface `MouseArea` (OLED on or dimmed). The evdev helper `watch-triple-tap.service` is leftover and must stay **disabled**. |
+| Bottom short-press Wi-Fi | `watch-bottom-wifi.service` reads `gpio-keys` event2 (`KEY_MENU` 139) without grab. Works on the gray LCD. Does not unblank. Ignore holds ≥1s (10s is PMIC reset). |
+| Archive | Long-press the pink shell, then double-tap the prompt. `watch-voice.sh` moves `hist.txt` to `/var/lib/watch-voice/archive/`. |
 
 Source: `~/.local/share/watch-voice/term/` and `install-term.sh`. Re-running the installer is the permanent path: it copies the face, enables the feed, writes `/desktop/asteroid/watchface`, restarts Lipstick, then `mcetool -E disabled`.
 
@@ -39,6 +41,8 @@ After `asteroid-launcher` restart, **do not** force `mcetool -E enabled`. On cat
 The console watchface must not redraw unless MCE `DisplayOn`. A 1 Hz refresh after blank keeps the AMOLED up, so neither the top key nor idle timeout can hand off to the gray LCD.
 
 **Confirmed 2026-08-16:** top button and idle timeout both switch to the gray digital LCD. Color console, split clock, centered weekday, and palette look right. Triple-tap Wi-Fi on the color console works.
+
+History is not wiped on Wi-Fi off, idle, or old turns. Archive is the shell long-press. Wi-Fi Powered off/on play `wipe.wav` / `wifi-on.wav`.
 
 ## Rollback (watchface only)
 
