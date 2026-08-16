@@ -45,7 +45,9 @@ Launcher came back. Gray FSTN clock returned. Then **buttons appeared dead**: to
 
 Cause: during the spike, `mcetool -E enabled` was used, then LPM was left **`disabled`** while `Powerkey blanking mode` was still `lpm`. MCE still logged powerkey (unblank ON, then `LPM_ON` → immediate `OFF`). The gray nanohub LCD stayed up, so it looked like the keys did nothing. OLED unblank was ~1 s of black behind the LCD.
 
-Fix applied 16:48 WIB: `mcetool -E enabled` then `mcetool --unblank-screen`. Display **on**, backlight 76, LPM enabled. Color panel should be visible again. Top short-press should blank to gray LPM and wake back to color.
+Fix applied 16:48 WIB: `mcetool -E enabled` then `mcetool --unblank-screen`. Display **on**, backlight 76, LPM enabled. User still reported **only the gray LCD** (16:49). MCE/backlight were already ON; the FSTN layer was still in timepiece.
+
+Follow-up 16:51: restarted Lipstick (compositor name had dropped from the session bus). 16:52: `setAmbientEnabled false`, `setUpdatesEnabled true`, MCE brightness 80 (sysfs 204). OLED should be bright if the panel is actually emitting; if the gray clock is still the only thing visible, nanohub LCD was left in timepiece by `--prepare-timepiece` and needs `nativeEnableLowPowerScreen(false)` or a **watch** reboot (not this PC).
 
 ## Conclusion
 
