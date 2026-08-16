@@ -49,7 +49,7 @@ Fix applied 16:48 WIB: `mcetool -E enabled` then `mcetool --unblank-screen`. Dis
 
 If the gray clock is still the only thing visible **and there is no OLED glow**, the panel is stuck the same way as the earlier fb0/backlight incident. Sysfs brightness can read 76–204 while the AMOLED emits nothing. `--prepare-timepiece` calls `cutOffScreen` / `bandMode`; do not use it as a wake path.
 
-**Recovery:** reboot the **watch**, not this PC. Done 16:55 WIB after user confirmed no brightness and keys/USB replug did nothing.
+**Recovery:** reboot the **watch**, not this PC. Done 16:55 WIB after user confirmed no brightness and keys/USB replug did nothing. After boot (16:57) the **full Asteroid launcher** was back — expected: we never persistently disabled Lipstick; `asteroid-launcher` is still enabled for `ceres`. Watch is a known-good stock session again.
 
 ## Conclusion
 
