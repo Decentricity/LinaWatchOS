@@ -6,8 +6,8 @@ End in mind: a terminal-mode watch. Verbose Lina logs on the color OLED, date/ti
 
 400×400 round OLED, bezel margin so glyphs are not clipped. Font large, console/fastboot density (~18–22 px), not Asteroid QML.
 
-- **Top ~60%:** faux `$ ` shell from the voice journal (not raw `watch-voice:` lines). Titillium. Errors in red. 24h scrollback, phone-style up/down in the pane; top/bottom screen edges stay launcher swipes. New echo pins the last `$ ` to the bottom of the pane.
-- **Bottom ~40%, top-aligned:** weekday, then date left / time+TZ right (Montserrat), WIFI left / BAT right, then centered SSID or `OFFLINE` / `SEARCHING` / `NO CONNECTION` (Barlow). Hot-pink shell; blue and purple status.
+- **Top ~60%:** faux `$ ` shell from the voice journal (not raw `watch-voice:` lines). DejaVu Sans Mono at 26 px. Errors in red. 24h scrollback, phone-style up/down in the pane; top/bottom screen edges stay launcher swipes. New echo pins the last `$ ` to the bottom of the pane.
+- **Bottom ~40%, top-aligned:** weekday, then date left / time+TZ right (Montserrat), WIFI left / BAT right (Barlow), then centered SSID (white) or `OFFLINE` (blue) / `SEARCHING` (pink) / `NO CONNECTION` (red).
 
 Wi-Fi changes (triple-tap or rate-limit disable) log into the voice journal **and** update the bottom line.
 

@@ -24,7 +24,7 @@ Source: `~/.local/share/watch-voice/term/` and `install-term.sh`. Re-running the
 
 ## Layout
 
-Top ~60%: faux `$ ` shell from the voice journal (`$ tinysay "…"`, `$ tinycap`, …). Titillium. Failures are red debug echoes, not pink `$ ` lines. History is kept 24 hours on disk (`console.hist`) and is swipe-scrollable up/down in this pane only. The watchface leaves the top and bottom 16% of the screen to asteroid-launcher (swipe-from-top = Quick Settings, swipe-from-bottom = app launcher). A new echo pins the last `$ ` to the bottom of the top pane. Display-only transform in `watch-term-feed.sh`; the real journal stays `watch-voice:` for debug.
+Top ~60%: faux `$ ` shell from the voice journal (`$ tinysay "…"`, `$ tinycap`, …). DejaVu Sans Mono at 26 px. Failures are red debug echoes, not pink `$ ` lines. History is kept 24 hours on disk (`console.hist`) and is swipe-scrollable up/down in this pane only. The watchface leaves the top and bottom 16% of the screen to asteroid-launcher (swipe-from-top = Quick Settings, swipe-from-bottom = app launcher). A new echo pins the last `$ ` to the bottom of the top pane. Display-only transform in `watch-term-feed.sh`; the real journal stays `watch-voice:` for debug.
 
 Bottom ~40%, top-aligned:
 
@@ -35,9 +35,9 @@ WIFI ON                          BAT 99%
            Cyberdeck2024
 ```
 
-Weekday centered (Montserrat, with date/time). Date left, time+TZ right. WIFI left, BAT right (Barlow). Bottom line is the SSID when associated, `OFFLINE` if Wi-Fi is powered off, `SEARCHING` while looking for a saved AP, `NO CONNECTION` if the radio is up but no recognized AP is in range. Battery from `nanohub_fuelgauge-0/capacity` **once per OLED on** (not on the 1 Hz feed).
+Weekday centered (Montserrat, with date/time). Date left, time+TZ right. WIFI left, BAT right (Barlow). Bottom line is the SSID when associated (white), `OFFLINE` if Wi-Fi is powered off (blue), `SEARCHING` while looking for a saved AP (pink), `NO CONNECTION` if the radio is up but no recognized AP is in range (red). Battery from `nanohub_fuelgauge-0/capacity` **once per OLED on** (not on the 1 Hz feed).
 
-Palette: hot-pink shell (`#ff4fd8`). Errors are red (`#ff3b3b`). Date and WIFI blue; WIFI OFF / OFFLINE / NO CONNECTION dimmer blue. Time, BAT, weekday, and SEARCHING purple.
+Palette: hot-pink shell (`#ff4fd8`, DejaVu Sans Mono at 26 px). Errors are red (`#ff3b3b`). Date and WIFI blue. Time, BAT, and weekday purple.
 
 After `asteroid-launcher` restart, **do not** force `mcetool -E enabled`. On catfish that is OLED doze (AOD), which blocks the gray FSTN. Match `/org/asteroidos/settings/always-on-display` (false here). USB nightstand AOD is also off (`/desktop/asteroid/nightstand/always-on-display`).
 
