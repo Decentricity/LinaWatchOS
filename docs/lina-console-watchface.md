@@ -12,7 +12,7 @@ Stopping Lipstick unblanks a black OLED and **breaks** gray LCD handover (MCE ne
 |---|---|
 | Watchface | `/usr/share/asteroid-launcher/watchfaces/018-lina-console.qml` |
 | Feed | `watch-term-feed.service` → `/var/lib/watch-voice/watch-term-feed.sh` |
-| Payload | `/var/lib/watch-voice/console.txt` (`date`, `WIFI ON`/`OFF`, `---`, then faux shell). 24h history in `console.hist`. |
+| Payload | `/var/lib/watch-voice/console.txt` (`date`, `WIFI ON`/`OFF`, SSID or `OFFLINE`/`SEARCHING`/`NO CONNECTION`, `---`, then faux shell). 24h history in `console.hist`. |
 | Previous face | `/var/lib/watch-voice/previous-watchface` |
 | Triple-tap Wi-Fi | Watchface taps (OLED on or dimmed), not on the top/bottom 16% edge bands. The evdev helper `watch-triple-tap.service` is leftover and must stay **disabled**. |
 | Shell scroll | Vertical phone-style flick inside the top pane only. Does not cover swipe-from-top or swipe-from-bottom. New journal lines jump to the last `$ `. |
@@ -24,19 +24,20 @@ Source: `~/.local/share/watch-voice/term/` and `install-term.sh`. Re-running the
 
 ## Layout
 
-Top ~70%: faux `$ ` shell from the voice journal (`$ tinysay "…"`, `$ tinycap`, …). Failures are red debug echoes, not pink `$ ` lines. History is kept 24 hours on disk (`console.hist`) and is swipe-scrollable up/down in this pane only. The watchface leaves the top and bottom 16% of the screen to asteroid-launcher (swipe-from-top = Quick Settings, swipe-from-bottom = app launcher). A new echo pins the last `$ ` to the bottom of the top pane. Display-only transform in `watch-term-feed.sh`; the real journal stays `watch-voice:` for debug.
+Top ~60%: faux `$ ` shell from the voice journal (`$ tinysay "…"`, `$ tinycap`, …). Titillium. Failures are red debug echoes, not pink `$ ` lines. History is kept 24 hours on disk (`console.hist`) and is swipe-scrollable up/down in this pane only. The watchface leaves the top and bottom 16% of the screen to asteroid-launcher (swipe-from-top = Quick Settings, swipe-from-bottom = app launcher). A new echo pins the last `$ ` to the bottom of the top pane. Display-only transform in `watch-term-feed.sh`; the real journal stays `watch-voice:` for debug.
 
-Bottom ~30%, top-aligned:
+Bottom ~40%, top-aligned:
 
 ```
-2026-08-16                    18:48 WIB
-WIFI OFF                         BAT 85%
-              Sunday
+              Monday
+2026-08-17                    09:08 WIB
+WIFI ON                          BAT 99%
+           Cyberdeck2024
 ```
 
-Date left, time+TZ right. WIFI left, BAT right. English weekday centered under that. Battery from `nanohub_fuelgauge-0/capacity` **once per OLED on** (not on the 1 Hz feed).
+Weekday centered (Montserrat, with date/time). Date left, time+TZ right. WIFI left, BAT right (Barlow). Bottom line is the SSID when associated, `OFFLINE` if Wi-Fi is powered off, `SEARCHING` while looking for a saved AP, `NO CONNECTION` if the radio is up but no recognized AP is in range. Battery from `nanohub_fuelgauge-0/capacity` **once per OLED on** (not on the 1 Hz feed).
 
-Palette: hot-pink shell (`#ff4fd8`). Errors are red (`#ff3b3b`). Bottom left (date, WIFI) blue; WIFI OFF is dimmer blue. Bottom right (time, BAT) and weekday purple.
+Palette: hot-pink shell (`#ff4fd8`). Errors are red (`#ff3b3b`). Date and WIFI blue; WIFI OFF / OFFLINE / NO CONNECTION dimmer blue. Time, BAT, weekday, and SEARCHING purple.
 
 After `asteroid-launcher` restart, **do not** force `mcetool -E enabled`. On catfish that is OLED doze (AOD), which blocks the gray FSTN. Match `/org/asteroidos/settings/always-on-display` (false here). USB nightstand AOD is also off (`/desktop/asteroid/nightstand/always-on-display`).
 
