@@ -6,7 +6,7 @@ End in mind: a terminal-mode watch. Verbose Lina logs on the color OLED, date/ti
 
 400×400 round OLED, bezel margin so glyphs are not clipped. Font large, console/fastboot density (~18–22 px), not Asteroid QML.
 
-- **Top ~60%:** faux `$ ` shell from the voice journal (not raw `watch-voice:` lines). DejaVu Sans Mono at 26 px. Errors in red. 24h scrollback, phone-style up/down in the pane; top/bottom screen edges stay launcher swipes. New echo pins the last `$ ` to the bottom of the pane.
+- **Top ~60%:** faux `$ ` shell from the voice journal (not raw `watch-voice:` lines). Titillium. Lines copy the real switches (`tinycap -D 0 -d 0 -c 1 -r 16000 -b 16 -T 6`, `./pico/bin/pico2wave -l en-US -w tts.wav`, `tinyplay -D 0 -d 0`). Errors in red. 24h scrollback, phone-style up/down in the pane; top/bottom screen edges stay launcher swipes. New echo pins the last `$ ` to the bottom of the pane.
 - **Bottom ~40%, top-aligned:** weekday, then date left / time+TZ right (Montserrat), WIFI left / BAT right (Barlow), then centered SSID (white) or `OFFLINE` (blue) / `SEARCHING` (pink) / `NO CONNECTION` (red).
 
 Wi-Fi changes (triple-tap or rate-limit disable) log into the voice journal **and** update the bottom line.
