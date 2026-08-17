@@ -12,17 +12,19 @@ Stopping Lipstick unblanks a black OLED and **breaks** gray LCD handover (MCE ne
 |---|---|
 | Watchface | `/usr/share/asteroid-launcher/watchfaces/018-lina-console.qml` |
 | Feed | `watch-term-feed.service` → `/var/lib/watch-voice/watch-term-feed.sh` |
-| Payload | `/var/lib/watch-voice/console.txt` (`date`, `WIFI ON`/`OFF`, `---`, then faux shell) |
+| Payload | `/var/lib/watch-voice/console.txt` (`date`, `WIFI ON`/`OFF`, `---`, then faux shell). 24h history in `console.hist`. |
 | Previous face | `/var/lib/watch-voice/previous-watchface` |
-| Triple-tap Wi-Fi | Watchface `MouseArea` (OLED on or dimmed). The evdev helper `watch-triple-tap.service` is leftover and must stay **disabled**. |
+| Triple-tap Wi-Fi | Watchface taps (OLED on or dimmed), not on the top/bottom 16% edge bands. The evdev helper `watch-triple-tap.service` is leftover and must stay **disabled**. |
+| Shell scroll | Vertical phone-style flick inside the top pane only. Does not cover swipe-from-top or swipe-from-bottom. New journal lines jump to the last `$ `. |
 | Bottom short-press Wi-Fi | `watch-bottom-wifi.service` reads `gpio-keys` event2 (`KEY_MENU` 139) without grab. Works on the gray LCD. Does not unblank. Ignore holds ≥1s (10s is PMIC reset). |
+| Wi-Fi heal after enable | `watch-wifi-heal.service` watches ConnMan wifi `Powered`. If scan says `No carrier` / `wpa_supplicant` stays `inactive`, it restarts `wpa_supplicant` so saved APs can autoconnect. This is the disable-then-enable bug on the wrist, not USB. Do not restart `connman` (that can bounce RNDIS). |
 | Archive | Long-press the pink shell, then double-tap the prompt. `watch-voice.sh` moves `hist.txt` to `/var/lib/watch-voice/archive/`. |
 
 Source: `~/.local/share/watch-voice/term/` and `install-term.sh`. Re-running the installer is the permanent path: it copies the face, enables the feed, writes `/desktop/asteroid/watchface`, restarts Lipstick, then `mcetool -E disabled`.
 
 ## Layout
 
-Top ~70%: faux `$ ` shell from the voice journal (`$ tinysay "…"`, `$ tinycap`, …). Display-only transform in `watch-term-feed.sh`; the real journal stays `watch-voice:` for debug.
+Top ~70%: faux `$ ` shell from the voice journal (`$ tinysay "…"`, `$ tinycap`, …). Failures are red debug echoes, not pink `$ ` lines. History is kept 24 hours on disk (`console.hist`) and is swipe-scrollable up/down in this pane only. The watchface leaves the top and bottom 16% of the screen to asteroid-launcher (swipe-from-top = Quick Settings, swipe-from-bottom = app launcher). A new echo pins the last `$ ` to the bottom of the top pane. Display-only transform in `watch-term-feed.sh`; the real journal stays `watch-voice:` for debug.
 
 Bottom ~30%, top-aligned:
 
@@ -34,7 +36,7 @@ WIFI OFF                         BAT 85%
 
 Date left, time+TZ right. WIFI left, BAT right. English weekday centered under that. Battery from `nanohub_fuelgauge-0/capacity` **once per OLED on** (not on the 1 Hz feed).
 
-Palette: hot-pink shell (`#ff4fd8`). Bottom left (date, WIFI) blue; WIFI OFF is dimmer blue. Bottom right (time, BAT) and weekday purple.
+Palette: hot-pink shell (`#ff4fd8`). Errors are red (`#ff3b3b`). Bottom left (date, WIFI) blue; WIFI OFF is dimmer blue. Bottom right (time, BAT) and weekday purple.
 
 After `asteroid-launcher` restart, **do not** force `mcetool -E enabled`. On catfish that is OLED doze (AOD), which blocks the gray FSTN. Match `/org/asteroidos/settings/always-on-display` (false here). USB nightstand AOD is also off (`/desktop/asteroid/nightstand/always-on-display`).
 

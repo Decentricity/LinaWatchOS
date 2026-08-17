@@ -12,6 +12,7 @@ Goal: Linux framework, touch, graphics (only enough for a small console), SSIDs,
 | lcd-tools + lcd-sync-time.timer | Time sync to nanohub |
 | nanohub (untouched lock/download) | Gray LCD + fuel gauge + sensors |
 | connman, wpa_supplicant | SSIDs; enable/disable wifi |
+| watch-wifi-heal.service | After disable then enable, ConnMan can sit on `No carrier` / inactive wpa and never join saved APs. Heal waits for `wlan0` then scans; restarts `wpa_supplicant` only if still stuck. Wrist bug, not USB. Do not restart connman. |
 | sensorfwd | Tilt-to-wake via MCE sensor-gestures |
 | TinyALSA + watch-voice.service | Lina |
 | `org.nemomobile.compositor` **or equivalent LPM ack** | Gray LCD on blank (see display notes) |

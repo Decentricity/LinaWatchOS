@@ -6,7 +6,7 @@ End in mind: a terminal-mode watch. Verbose Lina logs on the color OLED, date/ti
 
 400×400 round OLED, bezel margin so glyphs are not clipped. Font large, console/fastboot density (~18–22 px), not Asteroid QML.
 
-- **Top ~70%:** faux `$ ` shell from the voice journal (not raw `watch-voice:` lines)
+- **Top ~70%:** faux `$ ` shell from the voice journal (not raw `watch-voice:` lines). Errors in red. 24h scrollback, phone-style up/down in the pane; top/bottom screen edges stay launcher swipes. New echo pins the last `$ ` to the bottom of the pane.
 - **Bottom ~30%, top-aligned:** date left / time+TZ right, WIFI left / BAT right, English weekday centered under that. Hot-pink shell; blue and purple status.
 
 Wi-Fi changes (triple-tap or rate-limit disable) log into the voice journal **and** update the bottom line.
